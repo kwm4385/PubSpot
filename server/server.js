@@ -8,6 +8,6 @@ api.addEndpoints(app);
 // PRODUCTION -----------------------------------------
 app.use(express.static('dist'));
 
-app.listen(80, '0.0.0.0', function () {
-  console.log('Example app listening on port 80!');
+app.listen(process.env.PORT || 3000, '0.0.0.0', function () {
+  console.log('Example app listening on port ' + (process.env.PORT || 3000));
 });
