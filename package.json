@@ -8,8 +8,7 @@
     "start": "DEBUG=false node server/server.js",
     "start-dev": "DEBUG=true node server/server.js",
     "build": "webpack -p --config webpack.production.js",
-    "build-dev": "webpack -p",
-    "postinstall": "webpack -p --config webpack.production.js"
+    "build-dev": "webpack -p"
   },
   "dependencies": {
     "babel-core": "^6.3.15",
