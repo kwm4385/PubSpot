@@ -6,7 +6,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var devFlagPlugin = new webpack.DefinePlugin({
   __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
 });
-console.log(HtmlWebpackPlugin);
+
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
   entry: [
