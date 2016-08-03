@@ -18,8 +18,6 @@ app.use(require('webpack-dev-middleware')(compiler, {
   historyApiFallback: true
 }));
 
-app.use(require('webpack-hot-middleware')(compiler));
-
 app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
