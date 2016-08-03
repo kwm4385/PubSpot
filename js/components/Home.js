@@ -11,7 +11,7 @@ class Home extends Component {
     return (
       <main>
         <h1 className={styles.text}>Welcome {title}!</h1>
-        <button onClick={e => actions.changeTitle(prompt())}>
+        <button onClick={(e) => actions.changeTitle(prompt())}>
           Update Title
         </button>
       </main>
@@ -19,4 +19,4 @@ class Home extends Component {
   }
 }
 
-export default connect(state => state.Sample)(Home)
+export default connect((state) => state.Sample)(Home)
