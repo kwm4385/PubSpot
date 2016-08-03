@@ -8,6 +8,11 @@ var compiler = webpack(config);
 
 var DEBUG = process.env.DEBUG == 'true';
 
+// API endpoints ----------------------------------------
+app.get('/hello', function (req, res) {
+  res.send('Hello World!');
+});
+
 if (DEBUG) {
   // DEV -------------------------------------------------
   app.use(require('webpack-dev-middleware')(compiler, {
@@ -30,13 +35,9 @@ if (DEBUG) {
   });
 } else {
   // PRODUCTION -----------------------------------------
-  app.get('/hello', function (req, res) {
-    res.send('Hello World!');
-  });
-
   app.use(express.static('dist'));
 
-  app.listen(3000, function () {
+  app.listen(80, '0.0.0.0', function () {
     console.log('Example app listening on port 3000!');
   });
 }
