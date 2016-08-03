@@ -9,7 +9,7 @@ var compiler = webpack(config);
 var api  = require('./api');
 
 // API endpoints ----------------------------------------
-api(app);
+api.addEndpoints(app);
 
 // DEV -------------------------------------------------
 app.use(require('webpack-dev-middleware')(compiler, {
