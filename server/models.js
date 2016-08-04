@@ -2,7 +2,10 @@ var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 var tapSchema = mongoose.Schema({
-  location: { type: String, trim: true },
+  location: {
+    building: { type: String, trim: true },
+    room: { type: String, trim: true }
+  },
   handle: { type: Number, min: 0 },
   beer: {
     name: { type: String, trim: true },

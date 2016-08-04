@@ -2,7 +2,7 @@ var config = require('./config');
 var mongoose = require('mongoose');
 var models = require('./server/models');
 
-var uriString = `mongodb://${config.DB_URL}/${config.DB_NAME}`;
+var uriString = config.MONGODB_URI;
 
 mongoose.connect(uriString, function (err, res) {
   if (err) {
@@ -34,7 +34,10 @@ function createTaps() {
 
   for (var i = 0; i < 4; i++) {
     taps.push(new models.Tap({
-      location: '2 Canal - Beer Garden',
+      location: {
+        building: '2 Canal',
+        room: 'Beer Garden'
+      },
       handle: i,
       beer: {
         name: null,
@@ -45,7 +48,10 @@ function createTaps() {
 
   for (var i = 0; i < 4; i++) {
     taps.push(new models.Tap({
-      location: '2 Canal - Downstairs Kitchen',
+      location: {
+        building: '2 Canal',
+        room: 'Downstairs Kitchen'
+      },
       handle: i,
       beer: {
         name: null,
@@ -56,7 +62,10 @@ function createTaps() {
 
   for (var i = 0; i < 6; i++) {
     taps.push(new models.Tap({
-      location: 'Davenport - Benioff Kitchen',
+      location: {
+        building: 'Davenport',
+        room: 'Benioff Kitchen'
+      },
       handle: i,
       beer: {
         name: null,
