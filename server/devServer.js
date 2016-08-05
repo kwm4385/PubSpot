@@ -28,3 +28,11 @@ app.listen(3000, 'localhost', function (err, result) {
   }
   console.log('Listening at localhost:3000');
 });
+
+compiler.watch({ // watch options:
+    aggregateTimeout: 300, // wait so long for more changes
+    poll: true // use polling instead of native watchers
+    // pass a number to set the polling interval
+}, function(err, stats) {
+    // ...
+});
