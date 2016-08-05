@@ -9,7 +9,6 @@ export default React.createClass({
   render() {
     return (
       <div>
-        {/* <Home /> is your app entry point */}
         <Provider store={store}>
           <Home />
         </Provider>

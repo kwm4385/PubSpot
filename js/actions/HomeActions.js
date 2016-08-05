@@ -1,8 +1,10 @@
-import {TITLE_CHANGED} from '../constants/ActionTypes';
+import { TAPS_FETCHED } from '../constants/ActionTypes';
+import fetch from 'whatwg-fetch';
 
-export function changeTitle(text) {
-  return {
-    type: TITLE_CHANGED,
-    text
+export function getTaps() {
+  return function(dispatch) {
+    return fetch('/add_todo').then((response) => {
+
+    });
   }
 }

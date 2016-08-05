@@ -1,4 +1,5 @@
-var Taps = require('./models').Taps;
+var Tap = require('./models').Tap;
+var mongoose = require('mongoose');
 var apicache = require('apicache').options({ debug: true }).middleware;
 var fetch = require('node-fetch');
 var config = require('../config');
@@ -24,5 +25,22 @@ module.exports.addEndpoints = function api(app) {
     }).then((response) => {
       res.send(response);
     });
+  });
+
+  app.get('/taps', function (req, res) {
+    mongoose.connect(config.MONGODB_URI, function (err) {
+      if (err) {
+        console.error(err);
+        res.status(500);
+        res.send('Error connecting to database');
+        return;
+      }
+    });
+
+    Tap.where({}).then((result, err) => {
+      res.setHeader('Content-Type', 'application/json');
+      res.send(JSON.stringify(result || err));
+      mongoose.disconnect();
+    })
   });
 }
