@@ -32,6 +32,7 @@ module.exports = {
     new WebpackCleanupPlugin(),
     new CopyWebpackPlugin([
       { from: 'css/app.css' },
+      { from: 'img/', to: 'img/' }
     ])
   ],
   module: {
