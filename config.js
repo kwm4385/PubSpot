@@ -1,5 +1,5 @@
 
 module.exports = {
-  MONGODB_URI: process.env.DB_PASS || `mongodb://localhost/local`,
+  MONGODB_URI: process.env.MONGODB_URI || `mongodb://localhost/local`,
   BREWERYDB_KEY: process.env.BREWERYDB_KEY
 }
