@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as TapsActions from '../actions/TapsActions';
 import { AppBar } from 'material-ui';
-import styles from '../../css/app.css';
 
 class Home extends Component {
 
@@ -15,7 +14,7 @@ class Home extends Component {
       <main>
         <AppBar
           title="PubSpot"
-          className={styles.nav}
+          className="nav"
           iconElementLeft={<span></span>}
         />
       </main>

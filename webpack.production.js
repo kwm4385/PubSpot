@@ -1,6 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 
@@ -20,7 +20,6 @@ module.exports = {
   plugins: [
     new webpack.NoErrorsPlugin(),
     devFlagPlugin,
-    new ExtractTextPlugin('app.css'),
     new HtmlWebpackPlugin({
       title: 'PubSpot',
       template: 'index.ejs'
@@ -30,12 +29,15 @@ module.exports = {
         'NODE_ENV': JSON.stringify('production')
       }
     }),
-    new WebpackCleanupPlugin()
+    new WebpackCleanupPlugin(),
+    new CopyWebpackPlugin([
+      { from: 'css/app.css' },
+    ])
   ],
   module: {
     loaders: [
       { test: /\.js$/, loaders: ['babel'], exclude: /node_modules/ },
-      { test: /\.jpe?g$|\.gif$|\.png$|\.css$|\.woff$|\.ttf$|\.html$|\.mp3$/, loader: 'file' }
+      { test: /\.jpe?g$|\.gif$|\.png$|\.woff$|\.ttf$|\.html$|\.mp3$/, loader: 'file' }
     ]
   },
   resolve: {
