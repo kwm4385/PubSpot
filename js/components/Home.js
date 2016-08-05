@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as TapsActions from '../actions/TapsActions';
-import { Menu, MenuItem } from 'semantic-react';
+import { AppBar } from 'material-ui';
+import styles from '../../css/app.css';
 
 class Home extends Component {
 
@@ -10,13 +11,13 @@ class Home extends Component {
   }
 
   render() {
-    console.log(this.props.taps);
     return (
       <main>
-        <Menu>
-          <MenuItem>First item</MenuItem>
-          <MenuItem>Second Item</MenuItem>
-        </Menu>
+        <AppBar
+          title="PubSpot"
+          className={styles.nav}
+          iconElementLeft={<span></span>}
+        />
       </main>
     );
   }

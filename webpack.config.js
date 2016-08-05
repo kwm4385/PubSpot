@@ -2,6 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 
 var devFlagPlugin = new webpack.DefinePlugin({
   __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
@@ -26,13 +27,13 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'PubSpot',
       template: 'index.ejs'
-    })
+    }),
+    new WebpackCleanupPlugin()
   ],
   module: {
     loaders: [
       { test: /\.js$/, loaders: ['babel'], exclude: /node_modules/ },
-      { test: /\.css$/, loader: ExtractTextPlugin.extract('css-loader?module!cssnext-loader') },
-      { test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.html$|\.mp3$/, loader: 'file' }
+      { test: /\.jpe?g$|\.gif$|\.png$|\.css$|\.woff$|\.ttf$|\.html$|\.mp3$/, loader: 'file' }
     ]
   },
   resolve: {
