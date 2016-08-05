@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as TapsActions from '../actions/TapsActions';
-import styles from '../../css/app.css';
+import { Menu, MenuItem } from 'semantic-react';
 
 class Home extends Component {
 
@@ -13,7 +13,10 @@ class Home extends Component {
     console.log(this.props.taps);
     return (
       <main>
-
+        <Menu>
+          <MenuItem>First item</MenuItem>
+          <MenuItem>Second Item</MenuItem>
+        </Menu>
       </main>
     );
   }

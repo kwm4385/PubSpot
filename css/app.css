@@ -1,5 +1,7 @@
-.text {
-  font-size: 2rem;
-  line-height: 1.5;
-  color: #FF0000;
+
+html, body {
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1em;
+  line-height: 1.5em;
+  color: #555;
 }
