@@ -39,10 +39,8 @@ function createTaps() {
         room: 'Beer Garden'
       },
       handle: i,
-      beer: {
-        name: null,
-        id: null
-      }
+      beer: null,
+      kicked: false
     }));
   }
 
@@ -53,10 +51,8 @@ function createTaps() {
         room: 'Downstairs Kitchen'
       },
       handle: i,
-      beer: {
-        name: null,
-        id: null
-      }
+      beer: null,
+      kicked: false
     }));
   }
 
@@ -67,10 +63,8 @@ function createTaps() {
         room: 'Benioff Kitchen'
       },
       handle: i,
-      beer: {
-        name: null,
-        id: null
-      }
+      beer: null,
+      kicked: false
     }));
   }
 

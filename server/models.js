@@ -10,7 +10,8 @@ var tapSchema = mongoose.Schema({
   beer: {
     name: { type: String, trim: true },
     id: { type: Number, min: 0 }
-  }
+  },
+  kicked: Boolean
 });
 
 var Tap = mongoose.model('Taps', tapSchema);

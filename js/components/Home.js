@@ -1,19 +1,34 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import * as HomeActions from '../actions/HomeActions';
+import * as TapsActions from '../actions/TapsActions';
 import styles from '../../css/app.css';
 
 class Home extends Component {
+
+  componentWillMount() {
+    this.props.fetchTaps();
+  }
+
   render() {
-    const {title, dispatch} = this.props;
-    const actions = bindActionCreators(HomeActions, dispatch);
+    console.log(this.props.taps);
     return (
       <main>
-        
+
       </main>
     );
   }
 }
 
-export default connect((state) => state.Sample)(Home)
+function mapStateToProps(state) {
+  return {
+    taps: state.taps
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchTaps: () => dispatch(TapsActions.fetchTaps())
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

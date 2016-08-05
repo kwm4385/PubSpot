@@ -1,13 +1,11 @@
 import * as ActionTypes from '../constants/ActionTypes';
 
-let defaultState = {
-  title: 'Home'
-};
+let defaultState = [];
 
 export default function(state = defaultState, action) {
   switch (action.type) {
-    case ActionTypes.TITLE_CHANGED:
-      return {...state, title: action.text};
+    case ActionTypes.TAPS_FETCHED:
+      return action.data;
     default:
       return state;
   }
