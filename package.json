@@ -8,8 +8,7 @@
     "start": "DEBUG=false node server/server.js",
     "start-dev": "DEBUG=true node server/devServer.js",
     "build": "webpack -p --config webpack.production.js",
-    "build-dev": "webpack -p --watch",
-    "postinstall": "webpack -p --config webpack.production.js"
+    "build-dev": "webpack -p --watch"
   },
   "dependencies": {
     "apicache": "0.0.14",
