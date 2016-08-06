@@ -6,6 +6,7 @@ html, body {
   color: #555;
   margin: 0;
   background-image: url('../img/bg.png');
+  background-attachment: fixed;
 }
 
 .nav {
@@ -49,4 +50,10 @@ html, body {
 
 .empty {
   color: #ccc;
+}
+
+.beer-info {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }

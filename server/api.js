@@ -5,10 +5,6 @@ var fetch = require('node-fetch');
 var config = require('../config');
 
 module.exports.addEndpoints = function api(app) {
-  app.get('/hello', function (req, res) {
-    res.send(process.env.NODE_ENV);
-  });
-
   app.get('/search-beer/:query', apicache('5 minutes'), function (req, res) {
     var query = req.params.query;
     fetch(`https://api.brewerydb.com/v2/search?key=${config.BREWERYDB_KEY}&type=beer&withBreweries=y&withLocations=y&q=${query}`).then((response) => {
