@@ -9,7 +9,7 @@ var tapSchema = mongoose.Schema({
   handle: { type: Number, min: 0 },
   beer: {
     name: { type: String, trim: true },
-    id: { type: Number, min: 0 }
+    id: { type: String, trim: true }
   },
   kicked: Boolean
 });

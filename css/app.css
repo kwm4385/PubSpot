@@ -42,3 +42,11 @@ html, body {
 .tap-img {
   width: 200px;
 }
+
+.tap-info {
+  text-align: center;
+}
+
+.empty {
+  color: #ccc;
+}
