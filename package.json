@@ -34,6 +34,7 @@
     "mongoose": "^4.5.8",
     "node-fetch": "^1.6.0",
     "path": "^0.12.7",
+    "randomcolor": "^0.4.4",
     "react": "^15.3.0",
     "react-addons-shallow-compare": "^15.3.0",
     "react-dom": "^15.3.0",

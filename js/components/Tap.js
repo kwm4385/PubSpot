@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import * as BeerActions from '../actions/BeerActions';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
+import randomColor from 'randomColor';
 
 class Tap extends Component {
 
@@ -47,7 +48,10 @@ class Tap extends Component {
   render() {
     return (
       <div className="tap box">
-        <img className="tap-img" src='img/combo.png' />
+        <div className="handle-container">
+          {this.props.data.beer && <div className="handle-text" style={{color: randomColor({luminosity: 'light'})}}>{this.props.data.beer.name}</div>}
+          <img className="tap-img" src='img/combo.png' />
+        </div>
         {this.renderInfo()}
       </div>
     );

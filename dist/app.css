@@ -57,3 +57,20 @@ html, body {
   padding: 0;
   margin: 0;
 }
+
+.handle-container {
+  position: relative;
+}
+
+.handle-text {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 0.9em;
+  /*color: #34cc4e;*/
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  position: absolute;
+  left: 143px;
+  top: 92px;
+  overflow: hidden;
+}
