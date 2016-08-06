@@ -1,7 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 var devFlagPlugin = new webpack.DefinePlugin({
@@ -27,9 +26,9 @@ module.exports = {
       title: 'PubSpot',
       template: 'index.ejs'
     }),
-    new WebpackCleanupPlugin(),
     new CopyWebpackPlugin([
       { from: 'css/app.css' },
+      { from: 'css/flexboxgrid.min.css' },
       { from: 'img/', to: 'img/' }
     ])
   ],

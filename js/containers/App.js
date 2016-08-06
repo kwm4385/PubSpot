@@ -9,7 +9,7 @@ import Home from '../components/Home';
 const store = configureStore();
 
 const muiTheme = getMuiTheme({
-  fontFamily: 'Montserrat, Roboto, sans-serif',
+  fontFamily: 'Montserrat, Helvetica Neue, sans-serif',
   palette: {
     primary1Color: '#f47621',
     primary2Color: Colors.orange800,
