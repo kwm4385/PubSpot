@@ -31,7 +31,7 @@ class Home extends Component {
     return (
       <main>
         <AppBar
-          title="PubSpot"
+          title={<span>PubSp<img src="/img/beer.png" />t</span>}
           className="nav"
           iconElementLeft={<span></span>}
         />

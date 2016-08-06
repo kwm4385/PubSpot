@@ -20,7 +20,7 @@ export default class Location extends Component {
         <CardHeader
           title={this.props.building}
           subtitle={this.props.room}
-          avatar="img/beer.png"
+          avatar="/img/beer.png"
         />
         <CardText className="taps">
           <div className="row">
