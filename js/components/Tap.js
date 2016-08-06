@@ -4,6 +4,7 @@ import * as BeerActions from '../actions/BeerActions';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import randomColor from 'randomColor';
+import BeerModal from './BeerModal';
 
 class Tap extends Component {
 
@@ -22,7 +23,7 @@ class Tap extends Component {
           {beer.breweries.length && <li>{_.first(beer.breweries).name}</li>}
           {beer.style && <li>{beer.style.shortName}</li>}
           {beer.abv && <li>{beer.abv}%</li>}
-          <li><FlatButton label="More..." primary={true} /></li>
+          <li><BeerModal data={beer} /></li>
         </ul>
       );
     }
@@ -32,7 +33,7 @@ class Tap extends Component {
     if (this.props.data.beer) {
       return (
         <div className="tap-info">
-          <h2>{this.props.data.beer.name}</h2>
+          <h2>{this.props.beer && this.props.beer.nameDisplay}</h2>
           {this.renderBeer()}
         </div>
       );
