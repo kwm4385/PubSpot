@@ -86,7 +86,7 @@ export default class BeerModal extends Component {
       <div>
         <FlatButton label="More..." primary={true} onClick={() => this.handleOpen()} />
         <Dialog
-          bodyStyle={{padding: 0, overflow: 'hidden'}}
+          bodyStyle={{padding: 0, overflowX: 'hidden'}}
           actions={actions}
           modal={false}
           open={this.state.open}
