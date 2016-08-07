@@ -32,14 +32,6 @@ html, body {
   text-align: center;
 }
 
-/*.tap:not(:last-child) {
-  margin-right: 20px;
-}
-
-.tap:not(:first-child) {
-  margin-left: 20px;
-}*/
-
 .tap-img {
   width: 200px;
 }
@@ -52,6 +44,10 @@ html, body {
   color: #ccc;
 }
 
+.tight {
+  padding: 0 !important;
+}
+
 .beer-info {
   list-style: none;
   padding: 0;
@@ -59,18 +55,31 @@ html, body {
 }
 
 .handle-container {
+  width: 200px;
   position: relative;
 }
 
 .handle-text {
   font-family: 'Permanent Marker', cursive;
   font-size: 0.9em;
-  /*color: #34cc4e;*/
   width: 80px;
   height: 80px;
   border-radius: 40px;
   position: absolute;
-  left: 143px;
+  left: 101px;
   top: 92px;
   overflow: hidden;
+}
+
+.table-container {
+  padding-top: 10px;
+}
+
+.header-text {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.info-text {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
