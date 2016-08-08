@@ -3,6 +3,7 @@ import { Dialog, FlatButton, Avatar } from 'material-ui';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 import { List, ListItem } from 'material-ui/List';
+import classNames from 'classNames';
 
 export default class BeerModal extends Component {
 
@@ -10,6 +11,7 @@ export default class BeerModal extends Component {
     super();
     this.state = {
       open: false,
+      breweryOpen: false
     };
   }
 
@@ -47,29 +49,41 @@ export default class BeerModal extends Component {
   renderInfo() {
     const brewery = this.props.data.breweries && _.first(this.props.data.breweries);
 
+    const breweryDesc = brewery && (
+      <div className={classNames({'slidein info-text': true, 'slidein-open': this.state.breweryOpen, 'slidein-closed': !this.state.breweryOpen})}>
+        {brewery.description}
+      </div>
+    );
+
     return (
-      <Card>
-        <CardHeader
-          title={this.props.data.nameDisplay}
-          subtitle={this.props.data.breweries && _.first(this.props.data.breweries).name}
-          avatar={this.props.data.labels && this.props.data.labels.icon}
-        />
-        <CardText>
-          {this.props.data.description && <span className="header-text">{this.props.data.description}</span>}
-          {this.renderTable(brewery)}
-          <List className="tight">
-            <ListItem
-              primaryText={this.props.data.style.name}
-              secondaryText={this.props.data.style.description}
-            />
-            <ListItem
-              primaryText={brewery.name}
-              secondaryText={brewery.description}
-              leftAvatar={brewery.images && <Avatar src={brewery.images.icon} />}
-            />
-          </List>
-        </CardText>
-      </Card>
+      <div>
+        <Card>
+          <CardHeader
+            title={this.props.data.nameDisplay}
+            subtitle={this.props.data.breweries && _.first(this.props.data.breweries).name}
+            avatar={this.props.data.labels && this.props.data.labels.icon}
+          />
+          <CardText>
+            {this.props.data.description && <span className="header-text">{this.props.data.description}</span>}
+            {this.renderTable(brewery)}
+            <List className="tight">
+              <ListItem
+                primaryText={this.props.data.style.name}
+                secondaryText={this.props.data.style.description}
+              />
+              <ListItem
+                primaryText={brewery.name}
+                secondaryText={brewery.description}
+                leftAvatar={brewery.images && <Avatar src={brewery.images.icon} />}
+                onTouchTap={() => this.setState({breweryOpen: true})}
+              />
+            </List>
+          </CardText>
+        </Card>
+        <div className="slidein-container">
+          {breweryDesc}
+        </div>
+      </div>
     );
   }
 

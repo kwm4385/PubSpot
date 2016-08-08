@@ -50,7 +50,7 @@ class Tap extends Component {
     return (
       <div className="tap box">
         <div className="handle-container">
-          {this.props.data.beer && <div className="handle-text" style={{color: randomColor({luminosity: 'light'})}}>{this.props.data.beer.name}</div>}
+          {this.props.data.beer && <div className="handle-text" style={{color: randomColor()}}>{this.props.data.beer.name}</div>}
           <img className="tap-img" src='img/combo.png' />
         </div>
         {this.renderInfo()}
