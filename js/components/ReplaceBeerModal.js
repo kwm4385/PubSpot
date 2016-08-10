@@ -29,7 +29,6 @@ class ReplaceBeerModal extends Component {
   }
 
   onTapSelected(rows) {
-    console.log('up');
     this.setState({
       selectedTap: rows.length ? rows[0]: null
     });
@@ -65,7 +64,7 @@ class ReplaceBeerModal extends Component {
     });
 
     return (
-      <Table height="200px" onRowSelection={this.onTapSelected}>
+      <Table height="200px" onRowSelection={(rows) => this.onTapSelected(rows)}>
         <TableHeader adjustForCheckbox={true} displaySelectAll={false}>
           <TableRow>
             <TableHeaderColumn>Current Beer</TableHeaderColumn>
