@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as TapsActions from '../actions/TapsActions';
-import { AppBar } from 'material-ui';
+import { AppBar, FlatButton } from 'material-ui';
 import Location from './Location';
 import _ from 'lodash';
 
@@ -31,9 +31,10 @@ class Home extends Component {
     return (
       <main>
         <AppBar
-          title={<span>PubSp<img src="/img/beer.png" />t</span>}
+          title={<span>PubSp<img src="/img/beer.png" />t <small>Beta</small></span>}
           className="nav"
           iconElementLeft={<span></span>}
+          iconElementRight={<FlatButton label="Replace Beer" />}
         />
         <div className="container">
           {this.renderLocations()}

@@ -12,8 +12,13 @@ html, body {
 .nav {
   background-color: rgba(255, 255, 255, 0.5) !important;
 }
+
 .nav h1, .nav span{
  color: #555 !important;
+}
+
+.nav small {
+  font-size: x-small;
 }
 
 .container {
