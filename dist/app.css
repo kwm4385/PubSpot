@@ -119,3 +119,13 @@ html, body {
 .slidein-open {
   left: 0;
 }
+
+.spacer {
+  margin-bottom: 25px;
+}
+
+@media only screen and (max-width: 768px) {
+  .nav button {
+    display: none !important;
+  }
+}

@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import * as TapsActions from '../actions/TapsActions';
 import { AppBar, FlatButton } from 'material-ui';
 import Location from './Location';
+import ReplaceBeerModal from './ReplaceBeerModal';
 import _ from 'lodash';
 
 class Home extends Component {
@@ -34,11 +35,12 @@ class Home extends Component {
           title={<span>PubSp<img src="/img/beer.png" />t <small>Beta</small></span>}
           className="nav"
           iconElementLeft={<span></span>}
-          iconElementRight={<FlatButton label="Replace Beer" />}
+          iconElementRight={<FlatButton label="Replace Beer" onClick={() => this.refs.replaceBeerModal.open()} />}
         />
         <div className="container">
           {this.renderLocations()}
         </div>
+        <ReplaceBeerModal ref="replaceBeerModal" taps={this.props.taps} />
       </main>
     );
   }

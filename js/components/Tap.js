@@ -16,7 +16,6 @@ class Tap extends Component {
 
   renderBeer() {
     let beer = this.props.beer;
-    console.log(beer);
     if (beer) {
       return (
         <ul className="beer-info">
@@ -33,7 +32,7 @@ class Tap extends Component {
     if (this.props.data.beer) {
       return (
         <div className="tap-info">
-          <h2>{this.props.beer && this.props.beer.nameDisplay}</h2>
+          <h2>{this.props.data.beer.name}</h2>
           {this.renderBeer()}
         </div>
       );
