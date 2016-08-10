@@ -29,9 +29,11 @@ class ReplaceBeerModal extends Component {
   }
 
   onTapSelected(rows) {
-    this.setState({
-      selectedTap: rows.length ? rows[0]: null
-    });
+    if (rows.length) {
+      this.setState({
+        selectedTap: rows[0]
+      });
+    }
   }
 
   onBeerUpdate(text) {
@@ -72,7 +74,7 @@ class ReplaceBeerModal extends Component {
             <TableHeaderColumn>Room</TableHeaderColumn>
           </TableRow>
         </TableHeader>
-        <TableBody displayRowCheckbox={true}>
+        <TableBody displayRowCheckbox={true} deselectOnClickaway={false}>
           {rows}
         </TableBody>
       </Table>
@@ -106,7 +108,7 @@ class ReplaceBeerModal extends Component {
         <AutoComplete
           hintText="Search"
           dataSource={['abc', 'dce']}
-          onUpdateInput={this.onBeerUpdate}
+          
           searchText={this.state.beer}
           floatingLabelText="New Beer"
           fullWidth={true}
