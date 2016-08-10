@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Dialog, FlatButton, Avatar } from 'material-ui';
+import { Dialog, FlatButton, Avatar, IconButton, FontIcon } from 'material-ui';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 import { List, ListItem } from 'material-ui/List';
@@ -11,7 +11,8 @@ export default class BeerModal extends Component {
     super();
     this.state = {
       open: false,
-      breweryOpen: false
+      breweryOpen: false,
+      styleOpen: false
     };
   }
 
@@ -51,7 +52,22 @@ export default class BeerModal extends Component {
 
     const breweryDesc = brewery && (
       <div className={classNames({'slidein info-text': true, 'slidein-open': this.state.breweryOpen, 'slidein-closed': !this.state.breweryOpen})}>
-        {brewery.description}
+        <IconButton tooltip="Back" style={{display: 'block'}} onClick={() => this.setState({breweryOpen: false})}>
+          <FontIcon className="material-icons">keyboard_arrow_left</FontIcon>
+        </IconButton>
+        <strong>{brewery.name}</strong>
+        <p>{brewery.description}</p>
+        {brewery.website && <a href={brewery.website} target="blank">Website</a>}
+      </div>
+    );
+
+    const styleDesc = brewery && (
+      <div className={classNames({'slidein info-text': true, 'slidein-open': this.state.styleOpen, 'slidein-closed': !this.state.styleOpen})}>
+        <IconButton tooltip="Back" style={{display: 'block'}} onClick={() => this.setState({styleOpen: false})}>
+          <FontIcon className="material-icons">keyboard_arrow_left</FontIcon>
+        </IconButton>
+        <strong>{this.props.data.style.name}</strong>
+        <p>{this.props.data.style.description}</p>
       </div>
     );
 
@@ -70,6 +86,7 @@ export default class BeerModal extends Component {
               <ListItem
                 primaryText={this.props.data.style.name}
                 secondaryText={this.props.data.style.description}
+                onTouchTap={() => this.setState({styleOpen: true})}
               />
               <ListItem
                 primaryText={brewery.name}
@@ -81,6 +98,7 @@ export default class BeerModal extends Component {
           </CardText>
         </Card>
         <div className="slidein-container">
+          {styleDesc}
           {breweryDesc}
         </div>
       </div>
