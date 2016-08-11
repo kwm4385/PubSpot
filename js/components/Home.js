@@ -37,7 +37,7 @@ class Home extends Component {
           title={<span>PubSp<img src="/img/beer.png" />t <small>Beta</small></span>}
           className="nav"
           iconElementLeft={<span></span>}
-          iconElementRight={<FlatButton label="Replace Beer" onClick={() => this.refs.replaceBeerModal.open()} />}
+          iconElementRight={<FlatButton label="New Beer" onClick={() => this.refs.replaceBeerModal.open()} />}
         />
         <div className="container">
           {this.renderLocations()}
