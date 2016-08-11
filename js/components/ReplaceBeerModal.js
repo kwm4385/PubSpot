@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import { Dialog, FlatButton, AutoComplete, Checkbox } from 'material-ui';
+import { Dialog, FlatButton, AutoComplete, Checkbox, MenuItem } from 'material-ui';
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 
 class ReplaceBeerModal extends Component {
@@ -56,10 +56,15 @@ class ReplaceBeerModal extends Component {
 
   submit() {
     const location = this.taps[this.state.selectedTap].location;
-    const beer = {name: this.state.beer.text, id: this.state.beer.value};
+    let beer;
+    if (typeof this.state.beer === 'string') {
+      beer = {name: this.state.beer, id: null};
+    } else {
+      beer = {name: this.state.beer.text, id: this.state.beer.value.props.id};
+    }
     this.props.updateTap(location.building, location.room, location.handle, beer).then(() => {
       this.props.fetchTaps();
-      if (this.state.beer.value) this.props.fetchBeer(this.state.beer.value);
+      if (beer.id) this.props.fetchBeer(beer.id);
     });
     this.close();
   }
@@ -94,7 +99,16 @@ class ReplaceBeerModal extends Component {
 
   mapSearchResultsToDatasource() {
     return this.props.searchResults.map((beer) => {
-      return {text: beer.name, value: beer.id};
+      return {
+        text: beer.name,
+        value: (
+          <MenuItem
+            primaryText={beer.name}
+            secondaryText={_.first(beer.breweries) && _.first(beer.breweries).name}
+            id={beer.id}
+          />
+        )
+      };
     });
   }
 
@@ -125,7 +139,7 @@ class ReplaceBeerModal extends Component {
         <AutoComplete
           hintText="Search"
           dataSource={this.mapSearchResultsToDatasource()}
-          maxSearchResults={10}
+          maxSearchResults={5}
           filter={(text) => text !== ''}
           onUpdateInput={this.onBeerUpdate}
           onNewRequest={this.onBeerUpdate}
