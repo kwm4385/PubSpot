@@ -49,6 +49,7 @@ export default class BeerModal extends Component {
 
   renderInfo() {
     const brewery = this.props.data.breweries && _.first(this.props.data.breweries);
+    const style = this.props.data.style;
 
     const breweryDesc = brewery && (
       <div className={classNames({'slidein info-text': true, 'slidein-open': this.state.breweryOpen, 'slidein-closed': !this.state.breweryOpen})}>
@@ -61,7 +62,7 @@ export default class BeerModal extends Component {
       </div>
     );
 
-    const styleDesc = brewery && (
+    const styleDesc = (brewery && style) && (
       <div className={classNames({'slidein info-text': true, 'slidein-open': this.state.styleOpen, 'slidein-closed': !this.state.styleOpen})}>
         <IconButton tooltip="Back" style={{display: 'block'}} onClick={() => this.setState({styleOpen: false})}>
           <FontIcon className="material-icons">keyboard_arrow_left</FontIcon>
@@ -83,11 +84,11 @@ export default class BeerModal extends Component {
             {this.props.data.description && <span className="header-text">{this.props.data.description}</span>}
             {this.renderTable(brewery)}
             <List className="tight">
-              <ListItem
+              {style && <ListItem
                 primaryText={this.props.data.style.name}
                 secondaryText={this.props.data.style.description}
                 onTouchTap={() => this.setState({styleOpen: true})}
-              />
+              />}
               <ListItem
                 primaryText={brewery.name}
                 secondaryText={brewery.description}
