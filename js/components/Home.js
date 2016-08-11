@@ -52,6 +52,9 @@ class Home extends Component {
           fetchBeer={this.props.fetchBeer}
           sendSlack={this.props.sendSlack}
         />
+        <footer>
+          Visit PubSpot on <a href="https://github.com/kwm4385/PubSpot" target="blank">GitHub</a>
+        </footer>
       </main>
     );
   }
