@@ -6,9 +6,29 @@ export default class ConfirmationDialog extends Component {
   constructor() {
     super();
     this.state = {
-      open: false
+      open: false,
+      onConfirm: _.noop
     };
     _.bindAll(this, 'open', 'close');
+  }
+
+  open(onConfirm) {
+    this.setState({
+      open: true,
+      onConfirm
+    });
+  }
+
+  close() {
+    this.setState({
+      open: false,
+      onConfirm: _.noop
+    });
+  }
+
+  confirm() {
+    this.state.onConfirm();
+    this.close();
   }
 
   render() {
@@ -21,7 +41,7 @@ export default class ConfirmationDialog extends Component {
       <FlatButton
         label="Confirm"
         primary={true}
-        onTouchTap={() => this.props.onConfirm()}
+        onTouchTap={() => this.confirm()}
       />
     ];
 
@@ -29,6 +49,7 @@ export default class ConfirmationDialog extends Component {
       <Dialog
         actions={actions}
         modal={true}
+        title={this.props.title}
         open={this.state.open}
         autoScrollBodyContent={true}
       >

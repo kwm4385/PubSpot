@@ -7,6 +7,7 @@ import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'mat
 import FlatButton from 'material-ui/FlatButton';
 import randomColor from 'randomColor';
 import BeerModal from './BeerModal';
+import ConfirmationDialog from './ConfirmationDialog';
 
 class Tap extends Component {
 
@@ -17,9 +18,11 @@ class Tap extends Component {
   }
 
   onHandleClick() {
-    const location = this.props.data.location;
-    this.props.setKicked(location.building, location.room, location.handle, !this.props.data.kicked).then(() => {
-      this.props.fetchTaps();
+    this.refs.confirm.open(() => {
+      const location = this.props.data.location;
+      this.props.setKicked(location.building, location.room, location.handle, !this.props.data.kicked).then(() => {
+        this.props.fetchTaps();
+      });
     });
   }
 
@@ -57,9 +60,12 @@ class Tap extends Component {
   render() {
     return (
       <div className="tap box">
+        <ConfirmationDialog ref="confirm">
+          Are you sure you want to {this.props.data.kicked ? 'unkick' : 'kick'} this beer?
+        </ConfirmationDialog>
         <div className="handle-container">
-          {this.props.data.beer && <div className="handle-text" style={{color: randomColor()}}>{this.props.data.beer.name}</div>}
           <a className="handle" onClick={() => this.onHandleClick()}>
+            {this.props.data.beer && <div className="handle-text" style={{color: randomColor()}}>{this.props.data.beer.name}</div>}
             <img className="tap-img" src={`img/combo${this.props.data.kicked ? '_kicked' : ''}.png`} />
           </a>
         </div>
