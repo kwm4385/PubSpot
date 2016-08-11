@@ -7,7 +7,7 @@ export default class Location extends Component {
   renderTaps() {
     return _.orderBy(this.props.taps, ['location.handle']).map((tap, index) => {
       return (
-        <div key={index} className="col-xs">
+        <div key={index} className="col-xs-12 col-sm-6 col-md-4 col-lg-3">
           <Tap data={tap} />
         </div>
       );
