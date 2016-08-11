@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
 import { Dialog, FlatButton, AutoComplete, Checkbox, MenuItem } from 'material-ui';
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
+import ConfirmationDialog from './ConfirmationDialog';
 
 class ReplaceBeerModal extends Component {
 
@@ -11,7 +11,8 @@ class ReplaceBeerModal extends Component {
       open: false,
       selectedTap: null,
       beer: '',
-      slack: true
+      slack: true,
+      error: null
     };
     _.bindAll(this, 'open', 'close', 'onTapSelected', 'onBeerUpdate', 'onCheck', 'submit');
 
@@ -29,7 +30,8 @@ class ReplaceBeerModal extends Component {
       open: false,
       selectedTap: null,
       beer: '',
-      slack: true
+      slack: true,
+      error: null
     });
   }
 
@@ -54,19 +56,36 @@ class ReplaceBeerModal extends Component {
     });
   }
 
-  submit() {
-    const location = this.taps[this.state.selectedTap].location;
-    let beer;
-    if (typeof this.state.beer === 'string') {
-      beer = {name: this.state.beer, id: null};
-    } else {
-      beer = {name: this.state.beer.text, id: this.state.beer.value.props.id};
+  validate() {
+    if (this.state.selectedTap === null) {
+      this.setState({
+        error: 'Please select a tap.'
+      });
+      return false;
+    } else if (this.state.beer === '') {
+      this.setState({
+        error: 'Please select a beer.'
+      });
+      return false;
     }
-    this.props.updateTap(location.building, location.room, location.handle, beer).then(() => {
-      this.props.fetchTaps();
-      if (beer.id) this.props.fetchBeer(beer.id);
-    });
-    this.close();
+    return true;
+  }
+
+  submit() {
+    if (this.validate()) {
+      const location = this.taps[this.state.selectedTap].location;
+      let beer;
+      if (typeof this.state.beer === 'string') {
+        beer = {name: this.state.beer, id: null};
+      } else {
+        beer = {name: this.state.beer.text, id: this.state.beer.value.props.id};
+      }
+      this.props.updateTap(location.building, location.room, location.handle, beer).then(() => {
+        this.props.fetchTaps();
+        if (beer.id) this.props.fetchBeer(beer.id);
+      });
+      this.close();
+    }
   }
 
   renderTable() {
@@ -152,6 +171,8 @@ class ReplaceBeerModal extends Component {
           checked={this.state.slack}
           onCheck={this.onCheck}
         />
+        <div className="spacer" />
+        <span className="error-text">{this.state.error}</span>
       </Dialog>
     );
   }

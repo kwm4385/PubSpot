@@ -124,6 +124,10 @@ html, body {
   margin-bottom: 20px;
 }
 
+.error-text {
+  color: red;
+}
+
 @media only screen and (max-width: 768px) {
   .nav button {
     display: none !important;
