@@ -34,6 +34,7 @@
     "material-ui": "^0.15.3",
     "mongoose": "^4.5.8",
     "node-fetch": "^1.6.0",
+    "node-slack": "0.0.7",
     "path": "^0.12.7",
     "randomcolor": "^0.4.4",
     "react": "^15.3.0",
