@@ -26,7 +26,10 @@ class ReplaceBeerModal extends Component {
 
   close() {
     this.setState({
-      open: false
+      open: false,
+      selectedTap: null,
+      beer: '',
+      slack: true
     });
   }
 
