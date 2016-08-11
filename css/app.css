@@ -46,7 +46,7 @@ html, body {
 }
 
 .empty {
-  color: #ccc;
+  color: #ccc !important;
 }
 
 .empty button {
@@ -130,6 +130,10 @@ html, body {
 
 .error-text {
   color: red;
+}
+
+.handle {
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 768px) {

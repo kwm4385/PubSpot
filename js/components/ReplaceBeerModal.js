@@ -92,7 +92,7 @@ class ReplaceBeerModal extends Component {
     this.taps = _.orderBy(this.props.taps, ['location.building', 'location.room', 'location.handle']);
     const rows = this.taps.map((tap, index) => {
       return (
-        <TableRow key={index} selected={this.state.selectedTap === index}>
+        <TableRow key={index} selected={this.state.selectedTap === index} className={tap.kicked ? 'empty' : ''}>
           <TableRowColumn>{tap.beer ? tap.beer.name : 'Empty'}</TableRowColumn>
           <TableRowColumn>{tap.location.building}</TableRowColumn>
           <TableRowColumn>{tap.location.room}</TableRowColumn>
