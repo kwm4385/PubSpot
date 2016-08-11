@@ -49,6 +49,10 @@ html, body {
   color: #ccc;
 }
 
+.empty button {
+  color: #ccc !important;
+}
+
 .tight {
   padding: 0 !important;
 }
