@@ -15,7 +15,7 @@ class Home extends Component {
   }
 
   renderLocations() {
-    return _.uniqBy(this.props.taps, (t) => t.location.room).map((tap, index) => {
+    return _.orderBy(_.uniqBy(this.props.taps, (t) => t.location.room), ['location.building', 'location.room']).map((tap, index) => {
       let taps = _.filter(this.props.taps, (t) => {
         return t.location.room === tap.location.room;
       });
