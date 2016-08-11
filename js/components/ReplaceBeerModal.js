@@ -14,6 +14,8 @@ class ReplaceBeerModal extends Component {
       slack: true
     };
     _.bindAll(this, 'open', 'close', 'onTapSelected', 'onBeerUpdate', 'onCheck', 'submit');
+
+    this.startBeerSearch = _.debounce((text) => this.props.searchBeer(text), 250);
   }
 
   open() {
@@ -37,6 +39,7 @@ class ReplaceBeerModal extends Component {
   }
 
   onBeerUpdate(text) {
+    if (text !== '' && typeof text === 'string') this.startBeerSearch(text);
     this.setState({
       beer: text
     });
@@ -49,12 +52,17 @@ class ReplaceBeerModal extends Component {
   }
 
   submit() {
-    console.log(this.state);
+    const location = this.taps[this.state.selectedTap].location;
+    const beer = {name: this.state.beer.text, id: this.state.beer.value};
+    this.props.updateTap(location.building, location.room, location.handle, beer).then(() => {
+      this.props.fetchTaps();
+      if (this.state.beer.value) this.props.fetchBeer(this.state.beer.value);
+    });
     this.close();
   }
 
   renderTable() {
-    this.taps = _.orderBy(this.props.taps, ['location.room', 'handle']);
+    this.taps = _.orderBy(this.props.taps, ['location.building', 'location.room', 'location.handle']);
     const rows = this.taps.map((tap, index) => {
       return (
         <TableRow key={index} selected={this.state.selectedTap === index}>
@@ -79,6 +87,12 @@ class ReplaceBeerModal extends Component {
         </TableBody>
       </Table>
     );
+  }
+
+  mapSearchResultsToDatasource() {
+    return this.props.searchResults.map((beer) => {
+      return {text: beer.name, value: beer.id};
+    });
   }
 
   render() {
@@ -107,9 +121,11 @@ class ReplaceBeerModal extends Component {
         {this.renderTable()}
         <AutoComplete
           hintText="Search"
-          dataSource={['abc', 'dce']}
-          
-          searchText={this.state.beer}
+          dataSource={this.mapSearchResultsToDatasource()}
+          maxSearchResults={10}
+          filter={(text) => text !== ''}
+          onUpdateInput={this.onBeerUpdate}
+          onNewRequest={this.onBeerUpdate}
           floatingLabelText="New Beer"
           fullWidth={true}
         />

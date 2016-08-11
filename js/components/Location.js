@@ -5,7 +5,7 @@ import Tap from './Tap';
 export default class Location extends Component {
 
   renderTaps() {
-    return this.props.taps.map((tap, index) => {
+    return _.orderBy(this.props.taps, ['location.handle']).map((tap, index) => {
       return (
         <div key={index} className="col-xs">
           <Tap data={tap} />

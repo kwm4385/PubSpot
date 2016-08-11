@@ -36,9 +36,9 @@ function createTaps() {
     taps.push(new models.Tap({
       location: {
         building: '2 Canal',
-        room: 'Beer Garden'
+        room: 'Beer Garden',
+        handle: i
       },
-      handle: i,
       beer: null,
       kicked: false
     }));
@@ -48,9 +48,9 @@ function createTaps() {
     taps.push(new models.Tap({
       location: {
         building: '2 Canal',
-        room: 'Downstairs Kitchen'
+        room: 'Downstairs Kitchen',
+        handle: i
       },
-      handle: i,
       beer: null,
       kicked: false
     }));
@@ -59,10 +59,10 @@ function createTaps() {
   for (var i = 0; i < 6; i++) {
     taps.push(new models.Tap({
       location: {
-        building: 'Davenport',
-        room: 'Benioff Kitchen'
+        building: 'HQ',
+        room: 'Benioff Kitchen',
+        handle: i
       },
-      handle: i,
       beer: null,
       kicked: false
     }));

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as TapsActions from '../actions/TapsActions';
+import * as BeerActions from '../actions/BeerActions';
 import { AppBar, FlatButton } from 'material-ui';
 import Location from './Location';
 import ReplaceBeerModal from './ReplaceBeerModal';
@@ -40,7 +41,15 @@ class Home extends Component {
         <div className="container">
           {this.renderLocations()}
         </div>
-        <ReplaceBeerModal ref="replaceBeerModal" taps={this.props.taps} />
+        <ReplaceBeerModal
+          ref="replaceBeerModal"
+          taps={this.props.taps}
+          searchResults={this.props.searchResults}
+          searchBeer={this.props.searchBeer}
+          updateTap={this.props.updateTap}
+          fetchTaps={this.props.fetchTaps}
+          fetchBeer={this.props.fetchBeer}
+        />
       </main>
     );
   }
@@ -48,13 +57,17 @@ class Home extends Component {
 
 function mapStateToProps(state) {
   return {
-    taps: state.taps
+    taps: state.taps,
+    searchResults: state.searchResults
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchTaps: () => dispatch(TapsActions.fetchTaps())
+    fetchTaps: () => dispatch(TapsActions.fetchTaps()),
+    searchBeer: (query) => dispatch(BeerActions.searchBeer(query)),
+    updateTap: (building, room, handle, beer) => dispatch(TapsActions.updateTap(building, room, handle, beer)),
+    fetchBeer: (id) => dispatch(BeerActions.fetchBeer(id))
   };
 }
 
