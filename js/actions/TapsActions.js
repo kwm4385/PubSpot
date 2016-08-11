@@ -1,4 +1,4 @@
-import { TAPS_FETCHED, TAP_UPDATE, TAP_KICKED } from '../constants/ActionTypes';
+import { TAPS_FETCHED, TAP_UPDATED, TAP_KICKED } from '../constants/ActionTypes';
 import fetch from 'isomorphic-fetch';
 
 export function fetchTaps() {

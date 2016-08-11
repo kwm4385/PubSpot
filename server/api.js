@@ -1,5 +1,6 @@
 var Tap = require('./models').Tap;
 var mongoose = require('mongoose');
+var Slack = require('slack-node');
 var apicache = require('apicache').options({ debug: true }).middleware;
 var bodyParser = require('body-parser');
 var fetch = require('node-fetch');
@@ -97,6 +98,23 @@ module.exports.addEndpoints = function api(app) {
         res.send('Success');
       }
       mongoose.disconnect();
+    });
+  });
+
+  app.post('/send-slack', function (req, res) {
+    let slack = new Slack();
+    slack.setWebhook(config.SLACK_WEBHOOK);
+
+    const { location, beer } = req.body;
+    const message = `A new beer has been tapped in *${location.building} - ${location.room}*!\nIt's *${beer}*!\npubspot.herokuapp.com`
+    slack.webhook({
+      channel: config.SLACK_CHANNEL,
+      username: 'PubSpot',
+      icon_emoji: ':beer:',
+      text: message
+    }, function(err, response) {
+      console.log(response);
+      res.send(response);
     });
   });
 }

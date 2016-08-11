@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as TapsActions from '../actions/TapsActions';
 import * as BeerActions from '../actions/BeerActions';
+import * as SlackActions from '../actions/SlackActions';
 import { AppBar, FlatButton } from 'material-ui';
 import Location from './Location';
 import ReplaceBeerModal from './ReplaceBeerModal';
@@ -49,6 +50,7 @@ class Home extends Component {
           updateTap={this.props.updateTap}
           fetchTaps={this.props.fetchTaps}
           fetchBeer={this.props.fetchBeer}
+          sendSlack={this.props.sendSlack}
         />
       </main>
     );
@@ -67,7 +69,8 @@ function mapDispatchToProps(dispatch) {
     fetchTaps: () => dispatch(TapsActions.fetchTaps()),
     searchBeer: (query) => dispatch(BeerActions.searchBeer(query)),
     updateTap: (building, room, handle, beer) => dispatch(TapsActions.updateTap(building, room, handle, beer)),
-    fetchBeer: (id) => dispatch(BeerActions.fetchBeer(id))
+    fetchBeer: (id) => dispatch(BeerActions.fetchBeer(id)),
+    sendSlack: (location, beer) => dispatch(SlackActions.sendMessage(location, beer))
   };
 }
 

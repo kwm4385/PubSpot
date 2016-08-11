@@ -80,11 +80,19 @@ class ReplaceBeerModal extends Component {
       } else {
         beer = {name: this.state.beer.text, id: this.state.beer.value.props.id};
       }
+      const slack = this.state.slack;
       this.props.updateTap(location.building, location.room, location.handle, beer).then(() => {
         this.props.fetchTaps();
-        if (beer.id) this.props.fetchBeer(beer.id);
+        if (beer.id) {
+          this.props.fetchBeer(beer.id).then(() => {
+            if (slack) this.props.sendSlack(location, beer.name)
+            this.close();
+          });
+        } else {
+          if (slack) this.props.sendSlack(location, beer.name)
+          this.close();
+        }
       });
-      this.close();
     }
   }
 
