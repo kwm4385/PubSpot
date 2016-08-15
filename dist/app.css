@@ -140,9 +140,3 @@ footer {
   text-align: center;
   font-size: 12px;
 }
-
-@media only screen and (max-width: 768px) {
-  .nav button {
-    display: none !important;
-  }
-}
