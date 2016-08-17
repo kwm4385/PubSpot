@@ -80,6 +80,18 @@ function createTaps() {
     }));
   }
 
+  for (var i = 0; i < 2; i++) {
+    taps.push(new models.Tap({
+      location: {
+        building: 'PortSpot',
+        room: 'Kitchen',
+        handle: i
+      },
+      beer: null,
+      kicked: false
+    }));
+  }
+
   var promises = [];
   for (var t = 0; t < taps.length; t++) {
     promises.push(taps[t].save((err) => { if (err) console.log ('Error on save!') }));
