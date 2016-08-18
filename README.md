@@ -3,22 +3,22 @@
 
 > HubSpot beer tracker
 
-## Running your project
+## Running the project
 
-The generated project includes a development server on port `3000`, which will rebuild the app whenever you change application code. To start the server (with the dev-tools enabled), run:
-
+To start the server, which includes the backend and serving static assets (frontend):
 ```bash
 $ npm start
 ```
 
-To run the server with the dev-tools disabled, run:
-
+To build the frontend automatically as changes are made:
 ```bash
-$ DEBUG=false npm start
+$ npm run build-dev
 ```
 
-To build for production, this command will output optimized production code:
+Additional setup:
+Config variables expected are located in `config.js`. You will need a MongoDB instance running locally.
+Specify the URL via `MONGODB_URI` (defaults to `mongodb://localhost/local`)
+A BreweryDB key is required to fetch data about the beers. Go to http://www.brewerydb.com/developers and create an account to generate a key, then specifiy it via the `BREWERYDB_KEY` environment variable.
 
-```bash
-$ npm run build
-```
+Slack setup (optional):
+To enable Slack notifications, set the `SLACK_WEBHOOK` and `SLACK_CHANNEL` variables.
