@@ -35,7 +35,7 @@ class Tap extends Component {
           {beer.breweries.length && <li>{_.first(beer.breweries).name}</li>}
           {beer.style && <li>{beer.style.shortName}</li>}
           {beer.abv && <li>{beer.abv}%</li>}
-          <li>{lastUpdated}</li>
+          <li className="last-updated">{lastUpdated}</li>
           <li><BeerModal data={beer} /></li>
         </ul>
       );
@@ -104,7 +104,7 @@ function humanTimeSince(timeStamp) {
   }
   if (secondsPast < 3600) {
     const minutes = parseInt(secondsPast / 60);
-    return  `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+    return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
   }
   if (secondsPast < 86400) {
     const hours = parseInt(secondsPast / 3600);
