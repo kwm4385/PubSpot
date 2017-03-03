@@ -61,7 +61,7 @@ module.exports.addEndpoints = function api(app) {
       handle: parseInt(req.params.handle)
     };
 
-    Tap.findOneAndUpdate({location}, {beer: req.body}, {runValidators: true}).exec().then(function (result, err) {
+    Tap.findOneAndUpdate({location}, {beer: req.body, updated: Date.now()}, {runValidators: true}).exec().then(function (result, err) {
       if (err) {
         console.error(err);
         res.status(500);
@@ -89,7 +89,7 @@ module.exports.addEndpoints = function api(app) {
       handle: parseInt(req.params.handle)
     };
 
-    Tap.findOneAndUpdate({location}, {kicked: req.body.kicked}, {runValidators: true}).exec().then(function (result, err) {
+    Tap.findOneAndUpdate({location}, {kicked: req.body.kicked, updated: Date.now()}, {runValidators: true}).exec().then(function (result, err) {
       if (err) {
         console.error(err);
         res.status(500);
