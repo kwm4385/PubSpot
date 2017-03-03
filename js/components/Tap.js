@@ -3,8 +3,6 @@ import {connect} from 'react-redux';
 import classNames from 'classNames';
 import * as BeerActions from '../actions/BeerActions';
 import * as TapsActions from '../actions/TapsActions';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
 import randomColor from 'randomColor';
 import BeerModal from './BeerModal';
 import ConfirmationDialog from './ConfirmationDialog';
