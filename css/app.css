@@ -63,6 +63,14 @@ html, body {
   margin: 0;
 }
 
+.last-updated {
+  color: #9f9f9f;
+}
+
+.empty .last-updated {
+  color: inherit;
+}
+
 .handle-container {
   width: 200px;
   position: relative;

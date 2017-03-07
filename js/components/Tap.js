@@ -3,8 +3,6 @@ import {connect} from 'react-redux';
 import classNames from 'classNames';
 import * as BeerActions from '../actions/BeerActions';
 import * as TapsActions from '../actions/TapsActions';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
 import randomColor from 'randomColor';
 import BeerModal from './BeerModal';
 import ConfirmationDialog from './ConfirmationDialog';
@@ -28,12 +26,14 @@ class Tap extends Component {
 
   renderBeer() {
     let beer = this.props.beer;
+    const lastUpdated = this.props.data.updated ? humanTimeSince(this.props.data.updated) : "unknown";
     if (beer) {
       return (
         <ul className="beer-info">
           {beer.breweries.length && <li>{_.first(beer.breweries).name}</li>}
           {beer.style && <li>{beer.style.shortName}</li>}
           {beer.abv && <li>{beer.abv}%</li>}
+          <li className="last-updated">{lastUpdated}</li>
           <li><BeerModal data={beer} /></li>
         </ul>
       );
@@ -93,6 +93,28 @@ function mapDispatchToProps(dispatch) {
     fetchTaps: () => dispatch(TapsActions.fetchTaps()),
     setKicked: (building, room, handle, kicked) => dispatch(TapsActions.setKicked(building, room, handle, kicked))
   };
+}
+
+function humanTimeSince(timeStamp) {
+  const secondsPast = ((new Date()).getTime() - (new Date(timeStamp)).getTime()) / 1000;
+  if (secondsPast < 60) {
+    return "Just now!";
+  }
+  if (secondsPast < 3600) {
+    const minutes = parseInt(secondsPast / 60);
+    return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+  }
+  if (secondsPast < 86400) {
+    const hours = parseInt(secondsPast / 3600);
+    return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+  }
+  if (secondsPast <= 2592000) {
+    const days = parseInt(secondsPast / 86400);
+    return `${days} day${days > 1 ? 's' : ''} ago`;
+  }
+  if (secondsPast > 2592000){
+    return timeStamp.toISOString().slice(0, 10);
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Tap);
