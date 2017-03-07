@@ -44,12 +44,14 @@
     "react-tap-event-plugin": "^2.0.0",
     "redux": "^3.0.4",
     "redux-thunk": "^2.1.0",
-    "semantic-react": "^0.8.2",
-    "semantic-ui": "^2.2.2",
     "slack-node": "^0.2.0",
     "webpack": "^1.13.1",
     "webpack-cleanup-plugin": "^0.2.0",
     "webpack-dev-middleware": "^1.6.1",
     "whatwg-fetch": "^1.0.0"
+  },
+  "devDependencies": {
+    "semantic-react": "^0.8.2",
+    "semantic-ui": "^2.2.2"
   }
 }
