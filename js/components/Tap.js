@@ -113,7 +113,7 @@ function humanTimeSince(timeStamp) {
     return `${days} day${days > 1 ? 's' : ''} ago`;
   }
   if (secondsPast > 2592000){
-    return timeStamp.toISOString().slice(0, 10);
+    return new Date(timeStamp).toISOString().slice(0, 10);
   }
 }
 
