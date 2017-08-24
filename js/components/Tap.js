@@ -10,11 +10,6 @@ import ConfirmationDialog from './ConfirmationDialog';
 
 class Tap extends Component {
 
-  // constructor(){
-  //   super()
-  //   this.startBeerSearch = _.debounce((text) => this.props.searchBeer(text), 250);
-  // }
-
   componentWillMount() {
     if (this.props.data.beer) {
       this.props.fetchBeer(this.props.data.beer.id);
@@ -25,12 +20,7 @@ class Tap extends Component {
     const location = this.props.data.location;
     const isKicked = this.props.data.kicked
     if(isKicked){
-      console.log('trying to open from Tap.js')
-      console.log(JSON.stringify(location))
       this.props.modalOpenClose(JSON.stringify(location))
-      this.props.setKicked(location.building, location.room, location.handle, !this.props.data.kicked).then(() => {
-        this.props.fetchTaps();
-      });
     }
     else{
       this.refs.confirm.open(() => {

@@ -9,13 +9,19 @@ class ReplaceSingleBeerModal extends Component {
   constructor(){
     super();
     this.state = {
-      open:false
+      open:false,
+      slack: false
     };
-    _.bindAll(this, 'close', 'mapSearchResultsToDatasource', 'onBeerUpdate', 'submit', 'shouldModalBeOpen');
+    _.bindAll(this, 'close', 'mapSearchResultsToDatasource', 'onBeerUpdate', 'submit', 'shouldModalBeOpen', 'onCheck');
 
     this.startBeerSearch = _.debounce((text) => this.props.searchBeer(text), 250);
   }
 
+  onCheck(event, isChecked) {
+    this.setState({
+      slack: isChecked
+    });
+  }
 
   close() {
     this.props.modalOpenClose()
@@ -37,24 +43,24 @@ class ReplaceSingleBeerModal extends Component {
         beer = {name: this.state.beer.text, id: this.state.beer.value.props.id};
       }
       const slack = this.state.slack;
-      console.log(location)
       this.props.updateTap(location.building, location.room, location.handle, beer).then(() => {
-        this.props.fetchTaps();
-        if (beer.id) {
-          this.props.fetchBeer(beer.id).then(() => {
-            if (slack) this.props.sendSlack(location, beer.name)
-            this.close();
+          this.props.setKicked(location.building, location.room, location.handle, false).then(() => {
+            this.props.fetchTaps();
+            if (beer.id) {
+              this.props.fetchBeer(beer.id).then(() => {
+                if (slack) this.props.sendSlack(location, beer.name)
+                this.close();
+              });
+            } else {
+              if (slack) this.props.sendSlack(location, beer.name)
+              this.close();
+            }
           });
-        } else {
-          if (slack) this.props.sendSlack(location, beer.name)
-          this.close();
-        }
       });
   }
 
   shouldModalBeOpen(){
-    // may switch this to be off this.props.activeLocation to simplify state tree
-    if(this.props.shouldModalBeOpen){
+    if(this.props.activeLocation){
       return true
     }
     else{
@@ -92,7 +98,9 @@ class ReplaceSingleBeerModal extends Component {
         onTouchTap={() => this.submit()}
       />
     ];
-    return !this.props.activeLocation ? null :
+    // return !this.props.activeLocation ? null :
+    // 
+    return (
     <Dialog
         actions={actions}
         modal={false}
@@ -118,7 +126,7 @@ class ReplaceSingleBeerModal extends Component {
         />
         <div className="spacer" />
         <span className="error-text">{this.state.error}</span>
-      </Dialog>
+      </Dialog>)
   }
 }
 
@@ -137,6 +145,7 @@ function mapDispatchToProps(dispatch){
     fetchBeer: (id) => dispatch(BeerActions.fetchBeer(id)),
     updateTap: (building, room, handle, beer) => dispatch(TapsActions.updateTap(building, room, handle, beer)),
     modalOpenClose: (activeLocation) => dispatch(BeerActions.modalOpenClose(activeLocation)),
+    setKicked: (building, room, handle, kicked) => dispatch(TapsActions.setKicked(building, room, handle, kicked)),
   }
 }
 
