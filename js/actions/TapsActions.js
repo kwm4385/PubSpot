@@ -50,3 +50,4 @@ export function setKicked(building, room, handle, kicked) {
   });
   }
 }
+

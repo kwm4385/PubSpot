@@ -7,3 +7,5 @@ export const BEER_FETCHED = 'BEER_FETCHED';
 export const BEER_SEARCHED = 'BEER_SEARCHED';
 export const TAP_UPDATED = 'TAP_UPDATED';
 export const TAP_KICKED = 'TAP_KICKED';
+
+export const OPEN_CLOSE_MODAL = 'OPEN_CLOSE_MODAL';

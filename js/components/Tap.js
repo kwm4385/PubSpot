@@ -7,7 +7,13 @@ import randomColor from 'randomColor';
 import BeerModal from './BeerModal';
 import ConfirmationDialog from './ConfirmationDialog';
 
+
 class Tap extends Component {
+
+  // constructor(){
+  //   super()
+  //   this.startBeerSearch = _.debounce((text) => this.props.searchBeer(text), 250);
+  // }
 
   componentWillMount() {
     if (this.props.data.beer) {
@@ -16,12 +22,23 @@ class Tap extends Component {
   }
 
   onHandleClick() {
-    this.refs.confirm.open(() => {
-      const location = this.props.data.location;
+    const location = this.props.data.location;
+    const isKicked = this.props.data.kicked
+    if(isKicked){
+      console.log('trying to open from Tap.js')
+      console.log(JSON.stringify(location))
+      this.props.modalOpenClose(JSON.stringify(location))
       this.props.setKicked(location.building, location.room, location.handle, !this.props.data.kicked).then(() => {
         this.props.fetchTaps();
       });
-    });
+    }
+    else{
+      this.refs.confirm.open(() => {
+        this.props.setKicked(location.building, location.room, location.handle, !this.props.data.kicked).then(() => {
+          this.props.fetchTaps();
+        });
+      });
+    }
   }
 
   renderBeer() {
@@ -34,7 +51,11 @@ class Tap extends Component {
           {beer.style && <li>{beer.style.shortName}</li>}
           {beer.abv && <li>{beer.abv}%</li>}
           <li className="last-updated">{lastUpdated}</li>
-          <li><BeerModal data={beer} /></li>
+          <li><BeerModal
+                data={beer}
+                searchResults={this.props.searchResults}
+                searchBeer={this.props.searchBeer}
+           /></li>
         </ul>
       );
     }
@@ -78,7 +99,8 @@ class Tap extends Component {
 function mapStateToProps(state, ownProps) {
   if (ownProps.data.beer) {
     return {
-      beer: state.beer[ownProps.data.beer.id]
+      beer: state.beer[ownProps.data.beer.id],
+      searchResults: state.searchResults
     };
   } else {
     return {
@@ -91,7 +113,9 @@ function mapDispatchToProps(dispatch) {
   return {
     fetchBeer: (id) => dispatch(BeerActions.fetchBeer(id)),
     fetchTaps: () => dispatch(TapsActions.fetchTaps()),
-    setKicked: (building, room, handle, kicked) => dispatch(TapsActions.setKicked(building, room, handle, kicked))
+    setKicked: (building, room, handle, kicked) => dispatch(TapsActions.setKicked(building, room, handle, kicked)),
+    searchBeer: (query) => dispatch(BeerActions.searchBeer(query)),
+    modalOpenClose: (activeLocation) => dispatch(BeerActions.modalOpenClose(activeLocation)),
   };
 }
 

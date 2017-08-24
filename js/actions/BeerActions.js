@@ -1,4 +1,4 @@
-import { BEER_FETCHED, BEER_SEARCHED } from '../constants/ActionTypes';
+import { BEER_FETCHED, BEER_SEARCHED, OPEN_CLOSE_MODAL } from '../constants/ActionTypes';
 import fetch from 'isomorphic-fetch';
 
 export function fetchBeer(id) {
@@ -21,5 +21,12 @@ export function searchBeer(query) {
         data: json.data || []
       });
     }));
+  }
+}
+
+export function modalOpenClose(activeLocation){
+  return {
+    type: OPEN_CLOSE_MODAL,
+    activeLocation
   }
 }

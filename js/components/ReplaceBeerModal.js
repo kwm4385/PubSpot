@@ -37,6 +37,7 @@ class ReplaceBeerModal extends Component {
 
   onTapSelected(rows) {
     if (rows.length) {
+      // rows[0] is the index of the row in the table that has been selected
       this.setState({
         selectedTap: rows[0]
       });

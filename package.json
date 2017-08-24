@@ -51,6 +51,7 @@
     "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {
+    "redux-devtools-extension": "^2.13.2",
     "semantic-react": "^0.8.2",
     "semantic-ui": "^2.2.2"
   }
