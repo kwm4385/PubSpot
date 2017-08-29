@@ -20,7 +20,10 @@ class Tap extends Component {
     const location = this.props.data.location;
     const isKicked = this.props.data.kicked
     if(isKicked){
-      this.props.modalOpenClose(JSON.stringify(location))
+      this.refs.confirm.open(() => {
+        this.props.modalOpenClose(JSON.stringify(location))
+      })
+
     }
     else{
       this.refs.confirm.open(() => {
