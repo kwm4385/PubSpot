@@ -74,8 +74,8 @@ class ReplaceSingleBeerModal extends Component {
         text: beer.name,
         value: (
           <MenuItem
-            primaryText={beer.name}
-            secondaryText={_.first(beer.breweries) && _.first(beer.breweries).name}
+            primaryText={<span className="primaryText">{beer.name}</span>}
+            secondaryText={<span className="secondaryText">{_.first(beer.breweries) && _.first(beer.breweries).name}</span>}
             id={beer.id}
           />
         )
@@ -107,6 +107,7 @@ class ReplaceSingleBeerModal extends Component {
         open={this.shouldModalBeOpen()}
         autoScrollBodyContent={true}
         onRequestClose={() => this.close()}
+        contentClassName="replaceSingeContent"
       >
         <AutoComplete
           hintText="Search"
@@ -117,6 +118,9 @@ class ReplaceSingleBeerModal extends Component {
           onNewRequest={this.onBeerUpdate}
           floatingLabelText="New Beer"
           fullWidth={true}
+          style={
+            {overflowY:"show"}
+          }
         />
         <div className="spacer" />
         <Checkbox

@@ -151,3 +151,11 @@ footer {
   text-align: center;
   font-size: 12px;
 }
+@media only screen and (max-width: 800px) {
+  .replaceSingeContent{
+    width:100%!important;
+  }
+  .secondaryText{
+    display: none;
+  }
+}
