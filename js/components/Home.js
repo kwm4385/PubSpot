@@ -6,6 +6,7 @@ import * as SlackActions from '../actions/SlackActions';
 import { AppBar, FlatButton } from 'material-ui';
 import Location from './Location';
 import ReplaceBeerModal from './ReplaceBeerModal';
+import ReplaceSingleBeerModal from './ReplaceSingleBeerModal';
 import _ from 'lodash';
 
 class Home extends Component {
@@ -42,6 +43,7 @@ class Home extends Component {
         <div className="container">
           {this.renderLocations()}
         </div>
+        <ReplaceSingleBeerModal/>
         <ReplaceBeerModal
           ref="replaceBeerModal"
           taps={this.props.taps}
