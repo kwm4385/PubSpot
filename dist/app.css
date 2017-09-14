@@ -86,6 +86,9 @@ html, body {
   left: 101px;
   top: 92px;
   overflow: hidden;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .table-container {
